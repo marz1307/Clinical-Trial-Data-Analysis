@@ -6,7 +6,7 @@
 
 -- MAGIC %md
 -- MAGIC ### **_Introduction_**
--- MAGIC This project explores a clinical trial dataset using distributed data processing tool(Apache Spark - Spark Sql) to uncover patterns, conditions of interests and length of studies. The goal is to derive useful insights on into prevalent medical conditions, study types, and trial durations with diabetes related studies as a focal point.
+-- MAGIC This project explores a clinical trial dataset using distributed data processing tool(Apache Spark - Spark Sql) to uncover patterns, conditions of interests and length of studies. The goal is to derive useful insights into prevalent medical conditions, study types, and trial durations with diabetes related studies as a focal point.
 
 -- COMMAND ----------
 
@@ -23,8 +23,8 @@
 -- MAGIC ### _**Dataset Overview**_
 -- MAGIC Source: The dataset ```Clinicaltrial_16012025.csv``` was sourced from [clinicaltrials.gov](https://clinicaltrials.gov/). <br>
 -- MAGIC File Format: .csv with headers on the first row. <br>
--- MAGIC Attributes: The dataset comprises of 14 columns.<br>
--- MAGIC Records: The dataset comprises of 522660 rows.<br>
+-- MAGIC Attributes: The dataset contains 14 columns.<br>
+-- MAGIC Records: The dataset contains 522,660 rows.<br>
 -- MAGIC Size: 200MB
 
 -- COMMAND ----------
@@ -48,8 +48,8 @@
 -- MAGIC %md
 -- MAGIC ### _**Data Cleaning and Preprocessing**_
 -- MAGIC The dataset is cleaned removing spaces in the column headers for ease of use in code. This ensures that the column names are Sql friendly and follow common Sql and Python naming conventions. E.g <br>
--- MAGIC NCT Number → NCTNumber <br>
--- MAGIC Study Type → StudyType<br>
+-- MAGIC NCT Number → NCTNumber <br>
+-- MAGIC Study Type → StudyType<br>
 -- MAGIC <br>
 -- MAGIC The StartDate and CompletionDate date data types are coverted from string to DateType using ``` to_date``` and ```col```  functions, with the format MMM-dd-yyyy. E.g 'April 23, 2025'.
 
@@ -80,7 +80,7 @@
 -- COMMAND ----------
 
 -- MAGIC %md 
--- MAGIC **Q1. Study Type Frequency** <br>
+-- MAGIC **Study Type Frequency** <br>
 -- MAGIC Identified and quantified the distinct study types, ranking them from most frequent to least frequent.
 
 -- COMMAND ----------
@@ -94,7 +94,7 @@ ORDER BY StudyType_Frequency DESC
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC **Q2. Top 10 Conditions Studied** <br>
+-- MAGIC **Top 10 Conditions Studied** <br>
 -- MAGIC Determined the top 10 most studied conditions in the clinical trial by parsing and aggregating the Conditions column. The records with multiple conditions are handled using ``` EXPLODE```  and ``` SPLIT``` .
 
 -- COMMAND ----------
@@ -112,7 +112,7 @@ LIMIT 10
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC **Q3. Average Trial Duration.** <br>
+-- MAGIC **Average Trial Duration** <br>
 -- MAGIC Calculated the mean period/duration of completed trials in months i.e the trials with completion date not null or empty.
 
 -- COMMAND ----------
@@ -128,7 +128,7 @@ FROM (
 -- COMMAND ----------
 
 -- MAGIC %md
--- MAGIC **Q4. Diabetes-Related Trial Trends.** <br>
+-- MAGIC **Diabetes-Related Trial Trends** <br>
 -- MAGIC Evaluated and visualized the progression/trend of completed diabetes related trials over the years.
 
 -- COMMAND ----------
@@ -149,7 +149,7 @@ ORDER BY Trial_Completion_Year
 -- MAGIC Most Frequent Study Type: Interventional. <br>
 -- MAGIC Top Conditions Studied: Healthy. <br>
 -- MAGIC Average Trial Duration: Approx. 36 months. <br>
--- MAGIC Completed Diabetes Trials Trend: The graph shows an a steady increase from the year 2000, peaking between 2015 and 2020, and then a sharp decline towards 2025.
+-- MAGIC Completed Diabetes Trials Trend: The graph shows a steady increase from the year 2000, peaking between 2015 and 2020, and then a sharp decline towards 2025.
 
 -- COMMAND ----------
 
